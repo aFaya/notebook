@@ -1,6 +1,8 @@
 var Jupyter = Jupyter || {};
 var IPython = Jupyter;
 
+
+
 // Codemirror
 (function(mod) {
     this.CodeMirror = mod();
@@ -13864,15 +13866,16 @@ var baseJsUtils = (function baseJsUtils() {
             CodeMirror.findModeByMIME(modename) ||
             {mode: modename, mime: modename};
 
-        require([
-                // might want to use CodeMirror.modeURL here
-                ['codemirror/mode', info.mode, info.mode].join('/'),
-            ], function() {
-              // return the original mode, as from a kernelspec on first load
-              // or the mimetype, as for most highlighting
-              callback(mode.name ? mode : info.mime);
-            }, errback
-        );
+        // require([
+        //         // might want to use CodeMirror.modeURL here
+        //         ['codemirror/mode', info.mode, info.mode].join('/'),
+        //     ], function() {
+        //       // return the original mode, as from a kernelspec on first load
+        //       // or the mimetype, as for most highlighting
+        //       callback(mode.name ? mode : info.mime);
+        //     }, errback
+        // );
+        callback(mode.name ? mode : info.mime);
     };
 
     /** Error type for wrapped XHR errors. */
@@ -19151,7 +19154,7 @@ var notebookJsTextCell = (function notebookJsTextCell() {
     var configmod = serviceConfig;
     var mathjaxutils = notebookJsMathjaxutils;
     var celltoolbar = notebookJsCelltoolbar;
-    var marked = marked;
+    // var marked = marked;
 
 
     var Cell = cell.Cell;
@@ -23467,7 +23470,8 @@ var notebookJsCodecell = (function notebookJsCodecell() {
 	var configmod = serviceConfig;
 	var cell = notebookJsCell;
 	var outputarea = notebookJsOutputarea;
-	var completer = notebookJsCompleter;
+  var completer = notebookJsCompleter;
+  var celltoolbar = notebookJsCelltoolbar;
 
 	var Cell = cell.Cell;
 
@@ -25801,4 +25805,24 @@ var notebookJsNotebook = (function notebookJsNotebook() {
 	return {'Notebook': Notebook};
 })();
 
-
+IPython.utils = baseJsUtils;
+IPython.security = baseJsSecurity;
+IPython.keyboard = baseJsKeyboard;
+IPython.dialog = baseJsDialog;
+IPython.mathjaxutils = notebookJsMathjaxutils;
+IPython.CommManager = servicesKernelsComm.CommManager;
+IPython.Comm = servicesKernelsComm.Comm;
+IPython.Kernel = servicesKernelsKernel.Kernel;
+IPython.Session = servicesSessionsSession.Session;
+IPython.page = baseJsPage.Page;
+IPython.TextCell = notebookJsTextCell.TextCell;
+IPython.OutputArea = notebookJsOutputarea.OutputArea;
+IPython.KeyboardManager = notebookJsKeyboardManager.KeyboardManager;
+IPython.Completer = notebookJsCompleter.Completer;
+IPython.Notebook = notebookJsNotebook.Notebook;
+IPython.Tooltip = notebookJsTooltip.Tooltip;
+IPython.Pager = notebookJsPager.Pager;
+IPython.MarkdownCell = notebookJsTextCell.MarkdownCell;
+IPython.RawCell = notebookJsTextCell.RawCell;
+IPython.Cell = notebookJsCell.Cell;
+// IPython.NotebookTour = notebookjst
